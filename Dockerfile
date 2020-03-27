@@ -1,4 +1,4 @@
-FROM python:2.7.16-alpine3.10
+FROM python:2.7.17-alpine3.11
 ARG LOKI_VERSION=v0.30.0
 WORKDIR /app
 RUN apk add --update --no-cache git && \
