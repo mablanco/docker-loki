@@ -10,7 +10,7 @@ This image is built upon the official Alpine-based Python image.
 
 ### Show inline help
 
-    docker run -it --rm -v loki_signatures:/app/signature-base -v <directory>:/app/scan mablanco/loki -h
+    docker run -it --rm mablanco/loki -h
 
 ### Create a volume for Loki's signatures
 
