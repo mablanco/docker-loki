@@ -24,4 +24,4 @@ In order to be able to scan different directories in each invocation, it's advis
 
 ### Update signatures
 
-    docker run -it --rm -v loki_signatures:/app/signature-base -v <directory>:/app/scan mablanco/loki --update
+    docker run -it --rm -v loki_signatures:/app/signature-base mablanco/loki --update
