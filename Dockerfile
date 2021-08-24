@@ -1,5 +1,5 @@
 FROM python:3.9.6-alpine3.14
-ARG LOKI_VERSION=0.42.3
+ARG LOKI_VERSION=0.43.0
 WORKDIR /app
 RUN apk add --update --no-cache git && \
     git clone --depth 1 https://github.com/Neo23x0/Loki.git -b $LOKI_VERSION . && \
