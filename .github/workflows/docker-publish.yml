@@ -10,6 +10,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: mablanco/loki
+  GRYPE_VERSION: 0.28.0
 
 jobs:
   build:
@@ -39,6 +40,28 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Install Grype
+        run: |
+          cd /tmp
+          curl -sSfL https://github.com/anchore/grype/releases/download/v${{ env.GRYPE_VERSION }}/grype_${{ env.GRYPE_VERSION}}_linux_amd64.tar.gz -o grype__linux_amd64.tar.gz
+          tar xzvf grype_linux_amd64.tar.gz
+          chmod +x grype
+          mv -v grype /usr/local/bin/
+          echo -n "Installed "
+          /usr/local/bin/grype version | grep -i "^version"
+          echo "Download the latest vulnerability database..."
+          /usr/local/bin/grype db update -v
+  
+      - name: Scan image for vulnerabilities
+        run: /usr/local/bin/grype ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }} | tee /tmp/vuln-scan.txt
+
+      - name: Publish image scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: vuln-scan.txt
+          path: /tmp/vuln-scan.txt
+          retention-days: 15
