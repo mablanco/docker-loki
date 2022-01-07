@@ -59,7 +59,7 @@ jobs:
           /usr/local/bin/grype db update -v
   
       - name: Scan image for vulnerabilities
-        run: /usr/local/bin/grype ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }} | tee /tmp/vuln-scan.txt
+        run: /usr/local/bin/grype ${{ steps.meta.outputs.tags }} | tee /tmp/vuln-scan.txt
 
       - name: Publish image scan results
         uses: actions/upload-artifact@v2
