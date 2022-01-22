@@ -48,14 +48,10 @@ jobs:
 
       - name: Install Grype
         run: |
-          cd /tmp
-          curl -sSfL https://github.com/anchore/grype/releases/download/v${{ env.GRYPE_VERSION }}/grype_${{ env.GRYPE_VERSION}}_linux_amd64.tar.gz -o grype_linux_amd64.tar.gz
-          tar xzvf grype_linux_amd64.tar.gz
-          chmod +x grype
-          mv -v grype /usr/local/bin/
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
           echo -n "Installed "
           /usr/local/bin/grype version | grep -i "^version"
-          echo "Download the latest vulnerability database..."
+          echo "Updating vulnerability database..."
           /usr/local/bin/grype db update -v
   
       - name: Scan image for vulnerabilities
