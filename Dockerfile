@@ -1,5 +1,5 @@
-FROM python:3.9.9-alpine3.15
-ARG LOKI_VERSION=v0.44.2
+FROM python:3.9.14-alpine3.16
+ARG LOKI_VERSION=v0.45.0
 WORKDIR /app
 RUN apk upgrade && \
     apk add --no-cache --virtual .build-deps git build-base linux-headers openssl-dev && \
