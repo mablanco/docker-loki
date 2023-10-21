@@ -2,7 +2,7 @@
 
 ## Description
 
-Docker image for Loki, a Simple IOC Scanner (<https://github.com/Neo23x0/Loki>).
+Docker image for Loki, a simple IOC and YARA scanner (<https://github.com/Neo23x0/Loki>).
 
 This image is built upon the official Alpine-based Python image.
 
