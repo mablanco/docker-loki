@@ -18,7 +18,7 @@ This image is built upon the official Alpine-based Python image.
 
 ### Scan a directory
 
-    docker run -it --rm -v loki_signatures:/app/signature-base -v <directory>:/app/scan mablanco/loki -p /app/scan
+    docker run -it --rm -v loki_signatures:/app/signature-base -v <local_directory_to_scan>:/app/scan mablanco/loki -p ./scan
 
 In order to be able to scan different directories in each invocation, it's advisable to use the `--rm` parameter to delete the container after its execution as it's not needed anymore. You can then scan another directory mounting it with the `-v` parameter. Don't forget to also mount the `loki_signatures` volume to prevent Loki from downloading the signatures each time a container is run.
 
