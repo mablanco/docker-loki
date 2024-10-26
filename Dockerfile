@@ -1,4 +1,4 @@
-FROM python:3.11.7-alpine3.19
+FROM python:3.13.0-alpine3.20
 ARG LOKI_VERSION=0.51.0
 WORKDIR /app
 RUN apk upgrade --no-cache && \
